@@ -763,8 +763,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 124066782}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.072, y: 0.8, z: -0.1}
-  m_LocalScale: {x: 0.0006552272, y: 0.015625032, z: 0.0011223719}
+  m_LocalPosition: {x: -0.072, y: 0.29000002, z: -0.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1315920928}
   m_RootOrder: 0
@@ -2722,7 +2722,7 @@ Transform:
   m_GameObject: {fileID: 251532189}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 53.071796, y: 32.717426, z: 53.071796}
+  m_LocalScale: {x: 25, y: 25, z: 25}
   m_Children:
   - {fileID: 251236297}
   - {fileID: 251236225}
@@ -3496,7 +3496,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 283163550}
-  - component: {fileID: 283163551}
   - component: {fileID: 283163552}
   - component: {fileID: 283163553}
   - component: {fileID: 283163554}
@@ -3515,7 +3514,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 283163549}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 57.3, y: 10.511936, z: 128.4}
+  m_LocalPosition: {x: 0, y: 11, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2812923827450724592}
@@ -3523,26 +3522,8 @@ Transform:
   - {fileID: 1054058153}
   - {fileID: 1105959675}
   m_Father: {fileID: 1040984464}
-  m_RootOrder: 4
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!143 &283163551
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 283163549}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Height: 64
-  m_Radius: 9
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 32, z: 0}
 --- !u!114 &283163552
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3924,35 +3905,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 32, z: 0}
---- !u!21 &312086321
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 'pencilMaterial
-
-    571606'
-  m_Shader: {fileID: 10752, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 5
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 473d5661e2ba4b9bbd976b4fae44e362, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats: []
-    m_Colors:
-    - _Color: {r: 0.82089555, g: 0.82089555, b: 0.82089555, a: 1}
-  m_BuildTextureStacks: []
 --- !u!1 &316934704
 GameObject:
   m_ObjectHideFlags: 0
@@ -4614,7 +4566,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 474106, guid: 069e1e44b643edc4fb4a9d4311a78fb7, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 474106, guid: 069e1e44b643edc4fb4a9d4311a78fb7, type: 3}
       propertyPath: m_LocalScale.x
@@ -5492,7 +5444,7 @@ Transform:
   - {fileID: 906065166}
   - {fileID: 1673379112}
   m_Father: {fileID: 1040984464}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &534106597
 BoxCollider:
@@ -7209,7 +7161,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 312086321}
+  - {fileID: 1528169654}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7601,13 +7553,13 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 80
-  m_Radius: 20
+  m_Height: 64
+  m_Radius: 10
   m_SlopeLimit: 45
   m_StepOffset: 1
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 40, z: 0}
+  m_Center: {x: 0, y: 32, z: 0}
 --- !u!4 &1021882155
 Transform:
   m_ObjectHideFlags: 0
@@ -7615,15 +7567,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1021882153}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -72, y: 56, z: 86}
-  m_LocalScale: {x: 0.47106, y: 0.77, z: 0.47106}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1357363897}
   - {fileID: 251236349}
   - {fileID: 1500609805}
   m_Father: {fileID: 1040984464}
-  m_RootOrder: 9
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1021882156
 MonoBehaviour:
@@ -7710,16 +7662,16 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1021882155}
+  - {fileID: 283163550}
   - {fileID: 1175190295}
   - {fileID: 534106596}
   - {fileID: 1689095928}
   - {fileID: 1733062592}
-  - {fileID: 283163550}
   - {fileID: 1315920928}
   - {fileID: 396241680}
   - {fileID: 1966337560}
   - {fileID: 1474857575}
-  - {fileID: 1021882155}
   - {fileID: 1006671788}
   - {fileID: 1252379521}
   - {fileID: 295767198}
@@ -8174,7 +8126,7 @@ Transform:
   m_Children:
   - {fileID: 425160787}
   m_Father: {fileID: 1040984464}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 36.92, y: 180, z: 0}
 --- !u!135 &1175190296
 SphereCollider:
@@ -8700,7 +8652,7 @@ Transform:
   - {fileID: 124066783}
   - {fileID: 871988218}
   m_Father: {fileID: 1040984464}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1315920929
 BoxCollider:
@@ -10587,7 +10539,7 @@ Transform:
   - {fileID: 1474931003}
   - {fileID: 1474948993}
   m_Father: {fileID: 1040984464}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1474896281
 Transform:
@@ -11602,7 +11554,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1500609804}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 54.1, z: 30.8}
+  m_LocalPosition: {x: 0, y: 40.5, z: 30.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1021882155}
@@ -11720,6 +11672,35 @@ Transform:
   m_Father: {fileID: 722950423}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!21 &1528169654
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 'pencilMaterial
+
+    60446'
+  m_Shader: {fileID: 10752, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 5
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 473d5661e2ba4b9bbd976b4fae44e362, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats: []
+    m_Colors:
+    - _Color: {r: 0.82089555, g: 0.82089555, b: 0.82089555, a: 1}
+  m_BuildTextureStacks: []
 --- !u!1 &1608700058
 GameObject:
   m_ObjectHideFlags: 0
@@ -12000,7 +11981,7 @@ Transform:
   m_LocalScale: {x: 1526.1881, y: 63.999874, z: 890.9703}
   m_Children: []
   m_Father: {fileID: 1040984464}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1695442088
 GameObject:
@@ -12198,7 +12179,7 @@ Transform:
   - {fileID: 1068387074}
   - {fileID: 1921956199}
   m_Father: {fileID: 1040984464}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1733342662
 GameObject:
@@ -13736,7 +13717,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 413468, guid: 1e4e7284c1efd5f4eb702c799353072c, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 413468, guid: 1e4e7284c1efd5f4eb702c799353072c, type: 3}
       propertyPath: m_LocalScale.x

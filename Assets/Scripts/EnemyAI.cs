@@ -121,7 +121,7 @@ public class EnemyAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       // isGrounded = Physics.CheckSphere(groundCheck.position, 2f, groundLayer);
+        //isGrounded = Physics.CheckSphere(groundCheck.position, .5f, groundLayer);
         
         if (alertLevel == AlertLevel.Guard) anim.SetInteger("AlertLevel",0);
         else if (alertLevel == AlertLevel.Suspicious) anim.SetInteger("AlertLevel", 1);
@@ -242,9 +242,10 @@ public class EnemyAI : MonoBehaviour
                 }
             }
         }
-       
+
         //movement and gravity
 
+     
        /* enemyController.Move(movementVector * movementSpeed * Time.deltaTime);
 
         if (isGrounded == true && verticalVelocity.y < 0f)
