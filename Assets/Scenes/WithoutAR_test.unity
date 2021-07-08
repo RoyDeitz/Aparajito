@@ -7226,7 +7226,7 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 256
-  stabOrigin: {fileID: 0}
+  stabOrigin: {fileID: 1500609805}
   stabRadius: 20
   stabMaxDistance: 40
   knifeDamage: 100
@@ -8639,8 +8639,8 @@ Camera:
   near clip plane: 0.3
   far clip plane: 2000
   field of view: 60
-  orthographic: 0
-  orthographic size: 5
+  orthographic: 1
+  orthographic size: 220.3
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -8663,13 +8663,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1398087658}
-  m_LocalRotation: {x: 0.1896096, y: 0, z: 0, w: 0.98185956}
-  m_LocalPosition: {x: -15.6, y: 327.5, z: -458}
+  m_LocalRotation: {x: 0.2588191, y: 0, z: 0, w: 0.9659258}
+  m_LocalPosition: {x: -12.1, y: 409.3, z: -405.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 8
-  m_LocalEulerAnglesHint: {x: 21.86, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 30, y: 0, z: 0}
 --- !u!1 &1412709271
 GameObject:
   m_ObjectHideFlags: 0
