@@ -347,7 +347,7 @@ SkinnedMeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 3
   m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
+  m_RenderingLayerMask: 4
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: b784c826526e1ee4e92c07bd990c24e5, type: 2}
@@ -1461,7 +1461,7 @@ SkinnedMeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 3
   m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
+  m_RenderingLayerMask: 8
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 48434d195651ebb47851b6989202bcc5, type: 2}
@@ -1964,7 +1964,7 @@ SkinnedMeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 3
   m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
+  m_RenderingLayerMask: 8
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 7242cbc4035efd344af8f7f9b20dfd9d, type: 2}
@@ -5015,6 +5015,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: fcb8052d372649145a7a339257c2b123, type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: fcb8052d372649145a7a339257c2b123, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 72212905487578142ad93299ba7435ed, type: 2}
@@ -6087,7 +6091,7 @@ SkinnedMeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 3
   m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
+  m_RenderingLayerMask: 4
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: b784c826526e1ee4e92c07bd990c24e5, type: 2}
@@ -6426,7 +6430,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fcb8052d372649145a7a339257c2b123, type: 3}
       propertyPath: m_LocalScale.z
-      value: 76.55999
+      value: 89.03233
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fcb8052d372649145a7a339257c2b123, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6434,31 +6438,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fcb8052d372649145a7a339257c2b123, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.3400003
+      value: -1.1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fcb8052d372649145a7a339257c2b123, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.6700001
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fcb8052d372649145a7a339257c2b123, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.0000000043814703
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fcb8052d372649145a7a339257c2b123, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.0000000043814703
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fcb8052d372649145a7a339257c2b123, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 1
+      value: 0.99761856
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fcb8052d372649145a7a339257c2b123, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: -0.06897292
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fcb8052d372649145a7a339257c2b123, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: 7.91
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fcb8052d372649145a7a339257c2b123, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -6473,9 +6477,13 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: fcb8052d372649145a7a339257c2b123, type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: fcb8052d372649145a7a339257c2b123, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: adbd0f2c636b8bc43ac55b035fff2dfc, type: 2}
+      objectReference: {fileID: 2100000, guid: 72212905487578142ad93299ba7435ed, type: 2}
     - target: {fileID: 919132149155446097, guid: fcb8052d372649145a7a339257c2b123, type: 3}
       propertyPath: m_Name
       value: FOV_mesh
@@ -15419,7 +15427,7 @@ SkinnedMeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 3
   m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
+  m_RenderingLayerMask: 4
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 395c8302bb226de439dbe1a8ff3c6de6, type: 2}
@@ -15717,7 +15725,7 @@ SkinnedMeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 3
   m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
+  m_RenderingLayerMask: 4
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: b784c826526e1ee4e92c07bd990c24e5, type: 2}
