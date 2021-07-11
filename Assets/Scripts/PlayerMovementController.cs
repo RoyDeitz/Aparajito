@@ -95,21 +95,31 @@ public class PlayerMovementController : MonoBehaviour
         
     }
 
+    float x = 0f; 
+    float z = 0f; 
+
     void Update()
     {
         isGrounded = Physics.CheckSphere(groundCheck.position, 5f, groundLayer);
-
-        float x = joystick.Horizontal;
-        float z = joystick.Vertical;
-
+        if (Mathf.Abs(joystick.Horizontal) > .2 || Mathf.Abs(joystick.Vertical) > .2)
+        {
+            x = joystick.Horizontal;
+            z = joystick.Vertical;
+        }
+        else 
+        {
+            x = 0;
+            z = 0;
+        }
         
 
         //Only change the movement Vector if grounded
         if (isGrounded)
         {
-
-            movementVector = new Vector3(x,0f, z);
-            movementVector = movementVector.normalized;
+          
+                movementVector = new Vector3(x, 0f, z);
+                movementVector = movementVector.normalized;
+            
 
             // rotates the player according to joystick input
 
@@ -130,7 +140,7 @@ public class PlayerMovementController : MonoBehaviour
             if (isFiring || isStabbing|| isReloading)
             {
                 movementSpeed = 0f;
-                anim.SetFloat("Speed", 0f);
+                anim.SetFloat("Speed", movementSpeed);
                 if (isStabbing)
                 {
                     if (timeTillNextAction >= 0)
