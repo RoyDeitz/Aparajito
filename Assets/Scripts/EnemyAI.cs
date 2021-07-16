@@ -267,6 +267,7 @@ public class EnemyAI : MonoBehaviour
         if (!isDead)
         {
             health -= damage;
+            anim.SetTrigger("IsHit");
             if (health <= 0) 
             {
                 isDead = true;
@@ -279,9 +280,13 @@ public class EnemyAI : MonoBehaviour
         if (!isDead)
         {
             health -= damage;
+            anim.SetTrigger("IsHit");
             if (health <= 0)
             {
                 isDead = true;
+                anim.SetBool("IsDead",true);
+                anim.SetInteger("DeathType",deathType);
+                
             }
         }
     }
