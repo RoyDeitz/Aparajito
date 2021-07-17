@@ -3501,9 +3501,9 @@ GameObject:
   - component: {fileID: 283163553}
   - component: {fileID: 283163554}
   - component: {fileID: 283163555}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Soldier
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3728,9 +3728,9 @@ GameObject:
   - component: {fileID: 295767199}
   - component: {fileID: 295767200}
   - component: {fileID: 295767201}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sniper
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7193,9 +7193,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   stabOrigin: {fileID: 1500609805}
-  stabRadius: 20
-  stabMaxDistance: 40
-  knifeDamage: 100
+  stabRadius: 5
+  stabMaxDistance: 20
+  knifeDamage: 80
   pistolDamage: 34
   smgDamage: 25
   rifleDamage: 100
