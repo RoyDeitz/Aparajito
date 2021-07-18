@@ -267,10 +267,16 @@ public class EnemyAI : MonoBehaviour
         if (!isDead)
         {
             health -= damage;
-            anim.SetTrigger("IsHit");
-            if (health <= 0) 
+            
+            if (health <= 0)
             {
                 isDead = true;
+                anim.SetBool("IsDead", true);
+                anim.SetInteger("DeathType", 1);
+            }
+            else 
+            {
+                anim.SetTrigger("IsHit");
             }
         }
     }
@@ -280,13 +286,17 @@ public class EnemyAI : MonoBehaviour
         if (!isDead)
         {
             health -= damage;
-            anim.SetTrigger("IsHit");
+
             if (health <= 0)
             {
                 isDead = true;
-                anim.SetBool("IsDead",true);
-                anim.SetInteger("DeathType",deathType);
-                
+                anim.SetBool("IsDead", true);
+                anim.SetInteger("DeathType", deathType);
+
+            }
+            else 
+            {
+                anim.SetTrigger("IsHit");
             }
         }
     }
