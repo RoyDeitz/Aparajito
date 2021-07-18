@@ -7,7 +7,6 @@ public class PlayerMovementController : MonoBehaviour
     //Reference to the Character controller
     CharacterController controller;
     public Joystick joystick;
-    public Transform cameraTransform;
     public Transform spawnTransform;
  
 
@@ -54,6 +53,10 @@ public class PlayerMovementController : MonoBehaviour
     public GameObject smg;
     public GameObject rifle;
 
+
+    public bool hasSMG;
+    public bool hasRifle;
+    
     public enum CurrentWeapon
     {
         Knife,
@@ -71,6 +74,8 @@ public class PlayerMovementController : MonoBehaviour
     public int bulletsPerBurst = 6;
     float burstInterval;
     bool isBurstFiring;
+    public Transform smgMuzzlePoint;
+    public float smgRange; 
 
     public int rifleMaxAmmo;
     public int rifleCurrentAmmo;
@@ -78,13 +83,26 @@ public class PlayerMovementController : MonoBehaviour
     public int rifleCurrentMag;
     public float rifleFiringRate;
     public float rifleReloadTime=1f;
+    public Transform rifleMuzzlePoint;
+    public float rifleRange;
 
     bool isFiring=false;
     bool isStabbing=false;
     bool isReloading=false;
+    public int bulletRadius;
 
     public float stabbingInterval;
     float timeTillNextAction;
+
+    //Audio
+    public AudioSource drawKnifeSound;
+    public AudioSource stabSound;
+    public AudioSource SMGReloadSound;
+    public AudioSource SMGFireSound;
+    public AudioSource SMGDrawSound;
+    public AudioSource rifleDrawSound;
+    public AudioSource rifleFireSound;
+    public AudioSource rifleReloadSound;
 
     void Start()
     {
@@ -94,7 +112,7 @@ public class PlayerMovementController : MonoBehaviour
         currentWeapon = CurrentWeapon.Knife;
         
     }
-
+    //Input fields
     float x = 0f; 
     float z = 0f; 
 
@@ -286,6 +304,11 @@ public class PlayerMovementController : MonoBehaviour
                 timeTillNextAction = 1/rifleFiringRate;
                 anim.SetTrigger("RifleShoot");
                 rifleCurrentMag -= 1;
+                RaycastHit hit;
+                if (Physics.SphereCast(rifleMuzzlePoint.position, bulletRadius, rifleMuzzlePoint.forward, out hit, smgRange, enemyLayer))
+                {
+                    hit.collider.GetComponent<EnemyAI>().TakeDamageWithDeathtype(knifeDamage, 2);
+                }
             }
             else
             {
@@ -304,6 +327,13 @@ public class PlayerMovementController : MonoBehaviour
                 burstInterval = (1 / smgFiringRate);
                 anim.SetTrigger("SMGShoot");
                 smgCurrentMag -= 1;
+
+                RaycastHit hit;
+                if (Physics.SphereCast(smgMuzzlePoint.position, bulletRadius, smgMuzzlePoint.forward, out hit, smgRange, enemyLayer))
+                {
+                    hit.collider.GetComponent<EnemyAI>().TakeDamageWithDeathtype(knifeDamage,2);
+                }
+                
             }
             else 
             {
