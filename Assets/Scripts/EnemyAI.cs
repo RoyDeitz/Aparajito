@@ -243,23 +243,7 @@ public class EnemyAI : MonoBehaviour
             }
         }
 
-        //movement and gravity
-
-     
-       /* enemyController.Move(movementVector * movementSpeed * Time.deltaTime);
-
-        if (isGrounded == true && verticalVelocity.y < 0f)
-        {
-            verticalVelocity.y = -1f;
-        }
-        else
-        {
-            //Apply gravity
-            verticalVelocity.y += gravity * Time.deltaTime;
-        }
-
-        enemyController.Move(verticalVelocity * Time.deltaTime);
-       */
+       
     }
 
     public void TakeDamage(int damage) 

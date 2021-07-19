@@ -304,6 +304,8 @@ public class PlayerMovementController : MonoBehaviour
                 timeTillNextAction = 1/rifleFiringRate;
                 anim.SetTrigger("RifleShoot");
                 rifleCurrentMag -= 1;
+                rifleFireSound.Play();
+
                 RaycastHit hit;
                 if (Physics.SphereCast(rifleMuzzlePoint.position, bulletRadius, rifleMuzzlePoint.forward, out hit, smgRange, enemyLayer))
                 {
@@ -326,6 +328,7 @@ public class PlayerMovementController : MonoBehaviour
                 isBurstFiring = true;
                 burstInterval = (1 / smgFiringRate);
                 anim.SetTrigger("SMGShoot");
+                SMGFireSound.Play();
                 smgCurrentMag -= 1;
 
                 RaycastHit hit;
@@ -354,6 +357,8 @@ public class PlayerMovementController : MonoBehaviour
                     isReloading = true;
                     timeTillNextAction = smgReloadTime;
                     anim.SetTrigger("ReloadSMG");
+                    SMGReloadSound.Play();
+
                     if (smgCurrentAmmo > smgMagCapacity)
                     {
                         smgCurrentAmmo -= (smgMagCapacity - smgCurrentMag);
@@ -386,6 +391,8 @@ public class PlayerMovementController : MonoBehaviour
                     isReloading = true;
                     timeTillNextAction = rifleReloadTime;
                     anim.SetTrigger("ReloadRifle");
+                    rifleReloadSound.Play();
+
                     if (rifleCurrentAmmo > rifleMagCapacity)
                     {
                         rifleCurrentAmmo -= (rifleMagCapacity - rifleCurrentMag);
