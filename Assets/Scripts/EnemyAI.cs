@@ -33,7 +33,7 @@ public class EnemyAI : MonoBehaviour
 
     //health and death
     public int health;
-    bool isDead=false;
+    public bool isDead=false;
     int deathType;
 
     public enum AlertLevel 
@@ -99,14 +99,26 @@ public class EnemyAI : MonoBehaviour
     public float scopeDistance=.08f;
     public float scopeAdjustmentHeight = 30f;
 
+    public int rifleDamage = 40;
+    public int sniperDamage = 1000;
+    public int smgDamage=15;
+    public Transform weaponPoint;
+    public int bulletRadius;
+    public int weaponDamage;
+    public int weaponRange=1000;
+    public LayerMask playerLayer;
+
     bool isFiring = false;
     bool isReloading = false;
     float timeTillNextAction;
 
     public Transform direction;
+
+    EnemyAIGlobal globalAI;
     // Start is called before the first frame update
     void Start()
     {
+        globalAI = FindObjectOfType<EnemyAIGlobal>();
         lr = GetComponent<LineRenderer>();
         lr.material = safeObjMaterial;
         //enemyController = GetComponent<CharacterController>();
@@ -115,6 +127,11 @@ public class EnemyAI : MonoBehaviour
         {
             agent = gameObject.GetComponent<NavMeshAgent>();
             agent.SetDestination(waypoints[currentWaypoint].position);
+            weaponDamage = sniperDamage;
+        }
+        else 
+        {
+            weaponDamage = smgDamage;
         }
     }
 
@@ -122,102 +139,117 @@ public class EnemyAI : MonoBehaviour
     void Update()
     {
         //isGrounded = Physics.CheckSphere(groundCheck.position, .5f, groundLayer);
-        
-        if (alertLevel == AlertLevel.Guard) anim.SetInteger("AlertLevel",0);
-        else if (alertLevel == AlertLevel.Suspicious) anim.SetInteger("AlertLevel", 1);
-        else if (alertLevel == AlertLevel.Combat) anim.SetInteger("AlertLevel", 2);
-        
-        if (isObjFound)
+        if (!isDead)
         {
-            lr.positionCount = 2;
-            lr.startWidth = 2f;
-            lr.endWidth = 10;
-            lr.SetPosition(0, eyeTransform.position);
-            //lr.SetPosition(1,objPosition);
+            if (alertLevel == AlertLevel.Guard) anim.SetInteger("AlertLevel", 0);
+            else if (alertLevel == AlertLevel.Suspicious) anim.SetInteger("AlertLevel", 1);
+            else if (alertLevel == AlertLevel.Combat) anim.SetInteger("AlertLevel", 2);
 
-            if (isPlayerFound)
+            if (isObjFound)
             {
-                alertLevel = AlertLevel.Combat;
-                lr.material = dangerObjMaterial;
-                GameObject target = new GameObject();
-                target.transform.position = new Vector3(objPosition.x, transform.position.y, objPosition.z);
-                transform.LookAt(target.transform);
-                if (enemyType == EnemyType.Sniper)
-                {
-                    Vector3 scopeTarget = new Vector3(objPosition.x, objPosition.y + scopeAdjustmentHeight, objPosition.z);
-                    Vector3 direction = mainCamera.position -scopeTarget;
-                    SniperScope.SetActive(true);
-                    //SniperScope.transform.position = direction *(Vector3.Distance(mainCamera.position,target.transform.position)/ 40);
-                    SniperScope.transform.position =scopeTarget+ direction * scopeDistance;
-                    SniperScope.transform.rotation = mainCamera.rotation;
-                    SniperScope.SetActive(true);
-                }
-                lr.SetPosition(1, new Vector3(objPosition.x,objPosition.y+ 35,objPosition.z));
-                Destroy(target);
+                lr.positionCount = 2;
+                lr.startWidth = 2f;
+                lr.endWidth = 10;
+                lr.SetPosition(0, eyeTransform.position);
+                //lr.SetPosition(1,objPosition);
 
-                //shoot;
-                ShootRifle();
-                //InvokeRepeating("ShootRifle",rifleFiringRate,rifleFiringRate+1f);
+                if (isPlayerFound)
+                {
+                    alertLevel = AlertLevel.Combat;
+                    lr.material = dangerObjMaterial;
+                    GameObject target = new GameObject();
+                    target.transform.position = new Vector3(objPosition.x, transform.position.y, objPosition.z);
+                    transform.LookAt(target.transform);
+                    if (enemyType == EnemyType.Sniper)
+                    {
+                        Vector3 scopeTarget = new Vector3(objPosition.x, objPosition.y + scopeAdjustmentHeight, objPosition.z);
+                        Vector3 direction = mainCamera.position - scopeTarget;
+                        SniperScope.SetActive(true);
+                        //SniperScope.transform.position = direction *(Vector3.Distance(mainCamera.position,target.transform.position)/ 40);
+                        SniperScope.transform.position = scopeTarget + direction * scopeDistance;
+                        SniperScope.transform.rotation = mainCamera.rotation;
+                        SniperScope.SetActive(true);
+                    }
+                    lr.SetPosition(1, new Vector3(objPosition.x, objPosition.y + 35, objPosition.z));
+                    Destroy(target);
+
+                    //shoot;
+                    ShootRifle();
+                    //InvokeRepeating("ShootRifle",rifleFiringRate,rifleFiringRate+1f);
+                }
+                else
+                {
+                    lr.SetPosition(1, objPosition);
+                    //alertLevel = AlertLevel.Suspicious;
+                    lr.material = safeObjMaterial;
+                    SniperScope.SetActive(false);
+                    //CancelInvoke();
+
+                }
+
             }
             else
             {
-                lr.SetPosition(1, objPosition);
-                //alertLevel = AlertLevel.Suspicious;
-                lr.material = safeObjMaterial;
                 SniperScope.SetActive(false);
                 //CancelInvoke();
-               
+                lr.positionCount = 0;
+                lr.material = safeObjMaterial;
             }
-
-        }
-        else 
-        {
-            SniperScope.SetActive(false);
-            //CancelInvoke();
-            lr.positionCount = 0;
-            lr.material = safeObjMaterial;
-        }
-        //navigation
-        if (enemyType == EnemyType.Soldier)// && isGrounded)
-        {
-            if (!isPlayerFound)
+            //navigation
+            if (enemyType == EnemyType.Soldier)// && isGrounded)
             {
-                agent.speed = walkingSpeed;
-
-                if (agent.remainingDistance < 1f)
+                if (!isPlayerFound)
                 {
-                    currentWaypoint++;
-                    if (currentWaypoint >= waypoints.Length)
+                    agent.speed = movementSpeed;
+
+                    if (agent.remainingDistance < 1f)
                     {
-                        currentWaypoint = 0;
+                        currentWaypoint++;
+                        if (currentWaypoint >= waypoints.Length)
+                        {
+                            currentWaypoint = 0;
+                        }
+                    }
+                 
+                    agent.SetDestination(waypoints[currentWaypoint].position);
+                    
+                }
+                else
+                {
+                    agent.speed = movementSpeed;
+
+                }
+                anim.SetFloat("Speed", agent.speed);
+            }
+            else if (enemyType == EnemyType.Sniper)//&& isGrounded)
+            {
+                if (!isPlayerFound && (!isReloading || !isFiring))
+                {
+                    transform.forward = direction.forward;
+                }
+            }
+            //Shooting
+            if (isFiring || isReloading)
+            {
+                movementSpeed = 0f;
+                // anim.SetFloat("Speed", 0f);
+
+                if (isFiring)
+                {
+                    if (weapon == Weapon.Rifle)
+                    {
+                        if (timeTillNextAction >= 0)
+                        {
+                            timeTillNextAction -= Time.deltaTime;
+                        }
+                        else
+                        {
+                            isFiring = false;
+                            if (rifleCurrentMag <= 0) ReloadRifle();
+                        }
                     }
                 }
-
-                agent.SetDestination(waypoints[currentWaypoint].position);
-            }
-            else
-            {
-                agent.speed = 0f;
-
-            }
-            anim.SetFloat("Speed", agent.speed);
-        }
-        else if(enemyType == EnemyType.Sniper )//&& isGrounded)
-        {
-            if (!isPlayerFound && (!isReloading || !isFiring) )
-            {
-                transform.forward = direction.forward;
-            }
-        }
-        //Shooting
-        if (isFiring || isReloading)
-        {
-            movementSpeed = 0f;
-           // anim.SetFloat("Speed", 0f);
-
-            if (isFiring)
-            {
-                if (weapon == Weapon.Rifle)
+                else if (isReloading)
                 {
                     if (timeTillNextAction >= 0)
                     {
@@ -225,25 +257,21 @@ public class EnemyAI : MonoBehaviour
                     }
                     else
                     {
-                        isFiring = false;
-                        if (rifleCurrentMag <= 0) ReloadRifle();
+                        isReloading = false;
                     }
                 }
             }
-            else if (isReloading)
+            else 
             {
-                if (timeTillNextAction >= 0)
-                {
-                    timeTillNextAction -= Time.deltaTime;
-                }
-                else
-                {
-                    isReloading = false;
-                }
+                movementSpeed = walkingSpeed;
             }
-        }
 
-       
+        }
+        else
+        {// death condition
+            if (enemyType == EnemyType.Soldier || enemyType == EnemyType.Officer) agent.speed = 0f;
+            lr.positionCount = 0;
+        }
     }
 
     public void TakeDamage(int damage) 
@@ -257,6 +285,7 @@ public class EnemyAI : MonoBehaviour
                 isDead = true;
                 anim.SetBool("IsDead", true);
                 anim.SetInteger("DeathType", 1);
+                anim.SetTrigger("IsDeadTrigger");
             }
             else 
             {
@@ -276,7 +305,7 @@ public class EnemyAI : MonoBehaviour
                 isDead = true;
                 anim.SetBool("IsDead", true);
                 anim.SetInteger("DeathType", deathType);
-
+                anim.SetTrigger("IsDeadTrigger");
             }
             else 
             {
@@ -286,48 +315,62 @@ public class EnemyAI : MonoBehaviour
     }
     public void ShootRifle()
     {
-        if (!isFiring  && !isReloading && weapon==Weapon.Rifle)
+        if (!isDead)
         {
-            if (rifleCurrentMag > 0)
+            if (!isFiring && !isReloading && weapon == Weapon.Rifle)
             {
-                isFiring = true;
-                timeTillNextAction = rifleFiringRate;
-                anim.SetTrigger("ShootRifle");
-                rifleCurrentMag -= 1;
-            }
-            else
-            {
-                ReloadRifle();
+                if (rifleCurrentMag > 0)
+                {
+                    isFiring = true;
+                    timeTillNextAction = rifleFiringRate;
+                    anim.SetTrigger("ShootRifle");
+                    rifleCurrentMag -= 1;
+
+                    Vector3 direction = (objPosition - weaponPoint.position);
+                    RaycastHit hit;
+                    if (Physics.SphereCast(weaponPoint.position, bulletRadius, direction, out hit,weaponRange, playerLayer))
+                    {
+                        hit.collider.GetComponent<PlayerMovementController>().TakeDamageWithDeathType(weaponDamage, 2);
+                    }
+                }
+                else
+                {
+                    ReloadRifle();
+                }
             }
         }
     }
     public void ReloadRifle()
     {
-        if (rifleCurrentMag < rifleMagCapacity)
+        if (!isDead)
         {
-            if (rifleCurrentAmmo > 0)
+            if (rifleCurrentMag < rifleMagCapacity)
             {
-                if (!isReloading)
+                if (rifleCurrentAmmo > 0)
                 {
-                    isReloading = true;
-                    timeTillNextAction = rifleReloadTime;
-                    anim.SetTrigger("ReloadRifle");
-                    if (rifleCurrentAmmo > rifleMagCapacity)
+                    if (!isReloading)
                     {
-                        rifleCurrentAmmo -= (rifleMagCapacity - rifleCurrentMag);
-                        rifleCurrentMag += (rifleMagCapacity - rifleCurrentMag);
+                        isReloading = true;
+                        timeTillNextAction = rifleReloadTime;
+                        anim.SetTrigger("ReloadRifle");
+                        if (rifleCurrentAmmo > rifleMagCapacity)
+                        {
+                            rifleCurrentAmmo -= (rifleMagCapacity - rifleCurrentMag);
+                            rifleCurrentMag += (rifleMagCapacity - rifleCurrentMag);
+                        }
+                        else
+                        {
+                            rifleCurrentMag = rifleCurrentAmmo;
+                            rifleCurrentAmmo = 0;
+                        }
                     }
-                    else
-                    {
-                        rifleCurrentMag = rifleCurrentAmmo;
-                        rifleCurrentAmmo = 0;
-                    }
-                }
 
-            }
-            else
-            {
-                //dry fire or switch weapon
+                }
+                else
+                {
+                    //dry fire or switch weapon
+                    rifleCurrentAmmo = rifleMaxAmmo;
+                }
             }
         }
 

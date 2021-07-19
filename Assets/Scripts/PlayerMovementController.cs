@@ -104,8 +104,13 @@ public class PlayerMovementController : MonoBehaviour
     public AudioSource rifleFireSound;
     public AudioSource rifleReloadSound;
 
+
+    // health and damage
+    public int health;
+    public bool isDead=false;
     void Start()
     {
+        isDead = false;
         controller = gameObject.GetComponent<CharacterController>();
         isGrounded = false;
         transform.position = spawnTransform.position;
@@ -119,122 +124,124 @@ public class PlayerMovementController : MonoBehaviour
     void Update()
     {
         isGrounded = Physics.CheckSphere(groundCheck.position, 5f, groundLayer);
-        if (Mathf.Abs(joystick.Horizontal) > .2 || Mathf.Abs(joystick.Vertical) > .2)
+        if (!isDead)
         {
-            x = joystick.Horizontal;
-            z = joystick.Vertical;
-        }
-        else 
-        {
-            x = 0;
-            z = 0;
-        }
-        
-
-        //Only change the movement Vector if grounded
-        if (isGrounded)
-        {
-          
-                movementVector = new Vector3(x, 0f, z);
-                movementVector = movementVector.normalized;
-            
-
-            // rotates the player according to joystick input
-
-            if (Mathf.Abs(z) >= .1f || Mathf.Abs(x) > .1f)
+            if (Mathf.Abs(joystick.Horizontal) > .2 || Mathf.Abs(joystick.Vertical) > .2)
             {
-                transform.forward = movementVector;
-
-            }
-
-           
-
-            if (movementVector.magnitude > 1f)
-            {
-                movementVector = movementVector.normalized;
-
-            }
-            //stab, fire interval
-            if (isFiring || isStabbing|| isReloading)
-            {
-                movementSpeed = 0f;
-                anim.SetFloat("Speed", movementSpeed);
-                if (isStabbing)
-                {
-                    if (timeTillNextAction >= 0)
-                    {
-                        timeTillNextAction -= Time.deltaTime;
-                    }
-                    else
-                    {
-                        isStabbing = false;
-                    }
-                }
-                else if (isFiring)
-                {
-                    if (currentWeapon == CurrentWeapon.SMG)
-                    {
-                        if (timeTillNextAction >= 0)
-                        {
-                            timeTillNextAction -= Time.deltaTime;
-
-                            BurstFire();
-
-                            if (burstInterval >= 0)
-                            {
-                                burstInterval -= Time.deltaTime;
-                            }
-                            else
-                            {
-                                isBurstFiring = false;
-                            }
-
-                        }
-                        else
-                        {
-                            isFiring = false;
-                        }
-                    }
-                    else if(currentWeapon== CurrentWeapon.Rifle)
-                    {
-                        if (timeTillNextAction >= 0)
-                        {
-                            timeTillNextAction -= Time.deltaTime;
-                        }
-                        else
-                        {
-                            isFiring = false;
-                            if (rifleCurrentMag <= 0) ReloadRifle();
-                        }
-                    }
-                }
-                else if (isReloading) 
-                {
-                    if (timeTillNextAction >= 0)
-                    {
-                        timeTillNextAction -= Time.deltaTime;
-                    }
-                    else
-                    {
-                        isReloading = false;
-                    }
-                }
+                x = joystick.Horizontal;
+                z = joystick.Vertical;
             }
             else
             {
-                if (Mathf.Abs(x) > .7f || Mathf.Abs(z) > .7f) movementSpeed = runningSpeed;
-                else movementSpeed = walkingSpeed;
-                
-                if (Mathf.Abs(x) > Mathf.Abs(z)) anim.SetFloat("Speed", Mathf.Abs(x));
-                else anim.SetFloat("Speed", Mathf.Abs(z));
+                x = 0;
+                z = 0;
             }
 
-        }
 
-       
+            //Only change the movement Vector if grounded
+            if (isGrounded)
+            {
+
+                movementVector = new Vector3(x, 0f, z);
+                movementVector = movementVector.normalized;
+
+
+                // rotates the player according to joystick input
+
+                if (Mathf.Abs(z) >= .1f || Mathf.Abs(x) > .1f)
+                {
+                    transform.forward = movementVector;
+
+                }
+
+
+
+                if (movementVector.magnitude > 1f)
+                {
+                    movementVector = movementVector.normalized;
+
+                }
+                //stab, fire interval
+                if (isFiring || isStabbing || isReloading)
+                {
+                    movementSpeed = 0f;
+                    anim.SetFloat("Speed", movementSpeed);
+                    if (isStabbing)
+                    {
+                        if (timeTillNextAction >= 0)
+                        {
+                            timeTillNextAction -= Time.deltaTime;
+                        }
+                        else
+                        {
+                            isStabbing = false;
+                        }
+                    }
+                    else if (isFiring)
+                    {
+                        if (currentWeapon == CurrentWeapon.SMG)
+                        {
+                            if (timeTillNextAction >= 0)
+                            {
+                                timeTillNextAction -= Time.deltaTime;
+
+                                BurstFire();
+
+                                if (burstInterval >= 0)
+                                {
+                                    burstInterval -= Time.deltaTime;
+                                }
+                                else
+                                {
+                                    isBurstFiring = false;
+                                }
+
+                            }
+                            else
+                            {
+                                isFiring = false;
+                            }
+                        }
+                        else if (currentWeapon == CurrentWeapon.Rifle)
+                        {
+                            if (timeTillNextAction >= 0)
+                            {
+                                timeTillNextAction -= Time.deltaTime;
+                            }
+                            else
+                            {
+                                isFiring = false;
+                                if (rifleCurrentMag <= 0) ReloadRifle();
+                            }
+                        }
+                    }
+                    else if (isReloading)
+                    {
+                        if (timeTillNextAction >= 0)
+                        {
+                            timeTillNextAction -= Time.deltaTime;
+                        }
+                        else
+                        {
+                            isReloading = false;
+                        }
+                    }
+                }
+                else
+                {
+                    if (Mathf.Abs(x) > .7f || Mathf.Abs(z) > .7f) movementSpeed = runningSpeed;
+                    else movementSpeed = walkingSpeed;
+
+                    if (Mathf.Abs(x) > Mathf.Abs(z)) anim.SetFloat("Speed", Mathf.Abs(x));
+                    else anim.SetFloat("Speed", Mathf.Abs(z));
+                }
+
+            }
+
+
 
             controller.Move(movementVector * movementSpeed * Time.deltaTime);
-        
+        }
 
         //Jump
         /*
@@ -472,7 +479,24 @@ public class PlayerMovementController : MonoBehaviour
             drawKnifeSound.Play();
         }
     }
+    public void TakeDamageWithDeathType(int damage,int deathType) 
+    {
+        if (!isDead) 
+        {
+            health -= damage;
 
+            if (health <= 0)
+            {
+                isDead = true;
+                //play death anim
+            }
+            else 
+            {
+            //play hit anim
+            }
+        }
+    
+    }
    
 
    

@@ -10,38 +10,53 @@ public class EnemyFOV : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.tag == "Player")
+        if (!enemyAI.isDead)
         {
-            if (enemyAI.alertLevel == EnemyAI.AlertLevel.Guard)
+            if (other.tag == "Player")
             {
-                enemyAI.isObjFound = true;
-                enemyAI.objPosition = other.transform.position;
-                if (!enemyAI.isPlayerFound)
+                if (enemyAI.alertLevel == EnemyAI.AlertLevel.Guard)
                 {
-                    StartCoroutine(Recognise(detectionTime, other));
+                    enemyAI.isObjFound = true;
+                    enemyAI.objPosition = other.transform.position;
+                    if (!enemyAI.isPlayerFound)
+                    {
+                        StartCoroutine(Recognise(detectionTime, other));
+                    }
+                }
+                else
+                {
+                    enemyAI.isObjFound = true;
+                    enemyAI.isPlayerFound = true;
+                    enemyAI.objPosition = other.transform.position;
                 }
             }
-            else
-            {
-                enemyAI.isObjFound = true;
-                enemyAI.isPlayerFound = true;
-                enemyAI.objPosition = other.transform.position;
-            }
         }
-       
+        else 
+        {
+            StopAllCoroutines();
+            Destroy(gameObject);
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Player") 
+        if (!enemyAI.isDead)
         {
-            //set memory time
-            // search routine
+            if (other.tag == "Player")
+            {
+                //set memory time
+                // search routine
+                enemyAI.isPlayerFound = false;
+                enemyAI.isObjFound = false;
+            }
             enemyAI.isPlayerFound = false;
             enemyAI.isObjFound = false;
         }
-        enemyAI.isPlayerFound = false;
-        enemyAI.isObjFound = false;
+        else 
+        {
+            StopAllCoroutines();
+            Destroy(gameObject);
+        }
     }
 
     IEnumerator Recognise(float time, Collider other)
