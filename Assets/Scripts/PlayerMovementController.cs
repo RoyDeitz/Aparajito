@@ -271,11 +271,12 @@ public class PlayerMovementController : MonoBehaviour
             isStabbing = true;
             anim.SetTrigger("Stab");
 
-
+            stabSound.Play();
             RaycastHit hit;
             if (Physics.SphereCast(stabOrigin.position, stabRadius, stabOrigin.forward, out hit, stabMaxDistance, enemyLayer))
             {
                 hit.collider.GetComponent<EnemyAI>().TakeDamage(knifeDamage);
+
             }
         }
     }
@@ -428,6 +429,8 @@ public class PlayerMovementController : MonoBehaviour
             smg.SetActive(true);
             knifeHolster.SetActive(true);
             rifleHolster.SetActive(true);
+
+            SMGDrawSound.Play();
         }
     }
     public void SelectRifle() 
@@ -445,6 +448,8 @@ public class PlayerMovementController : MonoBehaviour
             rifle.SetActive(true);
             knife.SetActive(false);
             smgHolster.SetActive(true);
+
+            rifleDrawSound.Play();
         }
         
     }
@@ -463,6 +468,8 @@ public class PlayerMovementController : MonoBehaviour
             knife.SetActive(true);
             smgHolster.SetActive(true);
             rifleHolster.SetActive(true);
+
+            drawKnifeSound.Play();
         }
     }
 
