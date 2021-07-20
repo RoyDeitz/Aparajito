@@ -7453,7 +7453,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: f49a61c613ec2ea45b88903688374b05, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
-  m_Pitch: 1
+  m_Pitch: 0.86
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -9394,7 +9394,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   stabOrigin: {fileID: 1500609805}
-  stabRadius: 30
+  stabRadius: 40
   stabMaxDistance: 25
   knifeDamage: 1000
   pistolDamage: 34
@@ -9427,7 +9427,7 @@ MonoBehaviour:
   rifleReloadTime: 1.5
   rifleMuzzlePoint: {fileID: 1883392124}
   rifleRange: 1000
-  bulletRadius: 5
+  bulletRadius: 40
   stabbingInterval: 0.2
   drawKnifeSound: {fileID: 352664944}
   stabSound: {fileID: 702948161}

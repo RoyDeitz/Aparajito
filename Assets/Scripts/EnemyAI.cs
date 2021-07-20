@@ -301,6 +301,7 @@ public class EnemyAI : MonoBehaviour
                 anim.SetBool("IsDead", true);
                 anim.SetInteger("DeathType", 1);
                 anim.SetTrigger("IsDeadTrigger");
+                deathSound.Play();
             }
             else 
             {
@@ -321,6 +322,7 @@ public class EnemyAI : MonoBehaviour
                 anim.SetBool("IsDead", true);
                 anim.SetInteger("DeathType", deathType);
                 anim.SetTrigger("IsDeadTrigger");
+                deathSound.Play();
             }
             else 
             {

@@ -318,7 +318,10 @@ public class PlayerMovementController : MonoBehaviour
                 RaycastHit hit;
                 if (Physics.SphereCast(rifleMuzzlePoint.position, bulletRadius, rifleMuzzlePoint.forward, out hit, smgRange, enemyLayer))
                 {
-                    hit.collider.GetComponent<EnemyAI>().TakeDamageWithDeathtype(rifleDamage, 2);
+                    if (hit.collider.GetComponent<EnemyAI>() != null)
+                    {
+                        hit.collider.GetComponent<EnemyAI>().TakeDamageWithDeathtype(rifleDamage, 2);
+                    }
                 }
             }
             else
@@ -343,7 +346,10 @@ public class PlayerMovementController : MonoBehaviour
                 RaycastHit hit;
                 if (Physics.SphereCast(smgMuzzlePoint.position, bulletRadius, smgMuzzlePoint.forward, out hit, smgRange, enemyLayer))
                 {
-                    hit.collider.GetComponent<EnemyAI>().TakeDamageWithDeathtype(smgDamage,2);
+                    if (hit.collider.GetComponent<EnemyAI>() != null)
+                    {
+                        hit.collider.GetComponent<EnemyAI>().TakeDamageWithDeathtype(smgDamage, 2);
+                    }
                 }
                 
             }
