@@ -115,6 +115,14 @@ public class EnemyAI : MonoBehaviour
     public Transform direction;
 
     EnemyAIGlobal globalAI;
+
+
+    // audio
+    public AudioSource fireSound;
+    public AudioSource reloadSound;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -127,11 +135,18 @@ public class EnemyAI : MonoBehaviour
         {
             agent = gameObject.GetComponent<NavMeshAgent>();
             agent.SetDestination(waypoints[currentWaypoint].position);
-            weaponDamage = sniperDamage;
+            if (weapon == Weapon.Rifle || weapon==Weapon.Pistol)
+            {
+                weaponDamage = rifleDamage;
+            }
+            else 
+            {
+                weaponDamage = smgDamage;
+            }
         }
         else 
         {
-            weaponDamage = smgDamage;
+            weaponDamage = sniperDamage;
         }
     }
 
@@ -322,6 +337,7 @@ public class EnemyAI : MonoBehaviour
                 if (rifleCurrentMag > 0)
                 {
                     isFiring = true;
+                    
                     timeTillNextAction = rifleFiringRate;
                     anim.SetTrigger("ShootRifle");
                     rifleCurrentMag -= 1;
@@ -332,6 +348,8 @@ public class EnemyAI : MonoBehaviour
                     {
                         hit.collider.GetComponent<PlayerMovementController>().TakeDamageWithDeathType(weaponDamage, 2);
                     }
+
+                    fireSound.Play();
                 }
                 else
                 {
@@ -353,6 +371,8 @@ public class EnemyAI : MonoBehaviour
                         isReloading = true;
                         timeTillNextAction = rifleReloadTime;
                         anim.SetTrigger("ReloadRifle");
+                        reloadSound.Play();
+
                         if (rifleCurrentAmmo > rifleMagCapacity)
                         {
                             rifleCurrentAmmo -= (rifleMagCapacity - rifleCurrentMag);
