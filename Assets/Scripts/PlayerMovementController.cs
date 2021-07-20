@@ -103,6 +103,7 @@ public class PlayerMovementController : MonoBehaviour
     public AudioSource rifleDrawSound;
     public AudioSource rifleFireSound;
     public AudioSource rifleReloadSound;
+    public AudioSource deathSound;
 
 
     // health and damage

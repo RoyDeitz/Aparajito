@@ -120,7 +120,7 @@ public class EnemyAI : MonoBehaviour
     // audio
     public AudioSource fireSound;
     public AudioSource reloadSound;
-
+    public AudioSource deathSound;
 
 
     // Start is called before the first frame update
@@ -341,13 +341,18 @@ public class EnemyAI : MonoBehaviour
                     timeTillNextAction = rifleFiringRate;
                     anim.SetTrigger("ShootRifle");
                     rifleCurrentMag -= 1;
-
+                    
                     Vector3 direction = (objPosition - weaponPoint.position);
                     RaycastHit hit;
-                    if (Physics.SphereCast(weaponPoint.position, bulletRadius, direction, out hit,weaponRange, playerLayer))
+                    if (Physics.SphereCast(weaponPoint.position,bulletRadius, direction, out hit,weaponRange, playerLayer))
                     {
-                        hit.collider.GetComponent<PlayerMovementController>().TakeDamageWithDeathType(weaponDamage, 2);
+                        if (hit.collider.GetComponent<PlayerMovementController>() != null)
+                        {
+                            hit.collider.GetComponent<PlayerMovementController>().TakeDamageWithDeathType(weaponDamage, 2);
+                            Debug.DrawLine(weaponPoint.position, hit.point);
+                        }
                     }
+                    
 
                     fireSound.Play();
                 }
