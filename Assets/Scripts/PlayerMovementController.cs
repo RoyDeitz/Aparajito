@@ -495,11 +495,14 @@ public class PlayerMovementController : MonoBehaviour
             if (health <= 0)
             {
                 isDead = true;
+                anim.SetTrigger("IsDeadTrigger");
+                deathSound.Play();
                 //play death anim
             }
             else 
             {
-            //play hit anim
+                //play hit anim
+                anim.SetTrigger("IsHit");
             }
         }
     
