@@ -189,7 +189,10 @@ public class EnemyAI : MonoBehaviour
                     Destroy(target);
 
                     //shoot;
-                    ShootRifle();
+                    if (!FindObjectOfType<PlayerMovementController>().isDead)
+                    {
+                        ShootRifle();
+                    }
                     //InvokeRepeating("ShootRifle",rifleFiringRate,rifleFiringRate+1f);
                 }
                 else
