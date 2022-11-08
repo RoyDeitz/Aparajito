@@ -170,28 +170,31 @@ public class EnemyAI : MonoBehaviour
 
                 if (isPlayerFound)
                 {
-                    alertLevel = AlertLevel.Combat;
-                    lr.material = dangerObjMaterial;
-                    GameObject target = new GameObject();
-                    target.transform.position = new Vector3(objPosition.x, transform.position.y, objPosition.z);
-                    transform.LookAt(target.transform);
-                    if (enemyType == EnemyType.Sniper)
-                    {
-                        Vector3 scopeTarget = new Vector3(objPosition.x, objPosition.y + scopeAdjustmentHeight, objPosition.z);
-                        Vector3 direction = mainCamera.position - scopeTarget;
-                        SniperScope.SetActive(true);
-                        //SniperScope.transform.position = direction *(Vector3.Distance(mainCamera.position,target.transform.position)/ 40);
-                        SniperScope.transform.position = scopeTarget + direction * scopeDistance;
-                        SniperScope.transform.rotation = mainCamera.rotation;
-                        SniperScope.SetActive(true);
-                    }
-                    lr.SetPosition(1, new Vector3(objPosition.x, objPosition.y + 35, objPosition.z));
-                    Destroy(target);
-
-                    //shoot;
                     if (!FindObjectOfType<PlayerMovementController>().isDead)
                     {
-                        ShootRifle();
+                        alertLevel = AlertLevel.Combat;
+                        lr.material = dangerObjMaterial;
+                        GameObject target = new GameObject();
+                        target.transform.position = new Vector3(objPosition.x, transform.position.y, objPosition.z);
+                        transform.LookAt(target.transform);
+                        if (enemyType == EnemyType.Sniper)
+                        {
+                            Vector3 scopeTarget = new Vector3(objPosition.x, objPosition.y + scopeAdjustmentHeight, objPosition.z);
+                            Vector3 direction = mainCamera.position - scopeTarget;
+                            SniperScope.SetActive(true);
+                            //SniperScope.transform.position = direction *(Vector3.Distance(mainCamera.position,target.transform.position)/ 40);
+                            SniperScope.transform.position = scopeTarget + direction * scopeDistance;
+                            SniperScope.transform.rotation = mainCamera.rotation;
+                            SniperScope.SetActive(true);
+                        }
+                        lr.SetPosition(1, new Vector3(objPosition.x, objPosition.y + 35, objPosition.z));
+                        Destroy(target);
+
+                        //shoot;
+                        if (!FindObjectOfType<PlayerMovementController>().isDead)
+                        {
+                            ShootRifle();
+                        }
                     }
                     //InvokeRepeating("ShootRifle",rifleFiringRate,rifleFiringRate+1f);
                 }
