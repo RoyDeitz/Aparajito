@@ -15,8 +15,12 @@ public class PlayerMovementController : MonoBehaviour
     public float runningSpeed;
     public float walkingSpeed;
     public float crouchungSpeed;
-  
+
     Vector3 movementVector;
+    Vector3 moveDirection;
+    public float rotationSmoothTime = .1f;
+    float rotationSmoothVelocity;
+    public Transform cam;
 
     //Gravity/Jumping Velocity
     Vector3 verticalVelocity;
@@ -146,15 +150,31 @@ public class PlayerMovementController : MonoBehaviour
                 movementVector = new Vector3(x, 0f, z);
                 movementVector = movementVector.normalized;
 
+                
+                //// rotates the player according to joystick input
 
-                // rotates the player according to joystick input
+                //if (Mathf.Abs(z) >= .1f || Mathf.Abs(x) > .1f)
+                //{
+                //    transform.forward = movementVector;
 
-                if (Mathf.Abs(z) >= .1f || Mathf.Abs(x) > .1f)
+                //}
+                if (movementVector.magnitude > .1f)
                 {
-                    transform.forward = movementVector;
+                    movementVector = movementVector.normalized;
+                    float targetAngle = Mathf.Atan2(movementVector.x, movementVector.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
+                    float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref rotationSmoothVelocity, rotationSmoothTime);
+                    transform.rotation = Quaternion.Euler(0, angle, 0);
+                    moveDirection = Quaternion.Euler(0, targetAngle, 0) * Vector3.forward;
+                    transform.forward = moveDirection;// rotate towards move direction
+                    // footSound.enabled = true;
+
 
                 }
-
+                else
+                {
+                    moveDirection = Vector3.zero;
+                    //footSound.enabled = false;
+                }
 
 
                 if (movementVector.magnitude > 1f)
@@ -240,8 +260,8 @@ public class PlayerMovementController : MonoBehaviour
             }
 
 
-
-            controller.Move(movementVector * movementSpeed * Time.deltaTime);
+            controller.Move(moveDirection.normalized * movementSpeed * Time.deltaTime);
+            //controller.Move(movementVector * movementSpeed * Time.deltaTime);
         }
 
         //Jump
