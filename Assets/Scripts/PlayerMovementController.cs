@@ -7,7 +7,7 @@ public class PlayerMovementController : MonoBehaviour
     //Reference to the Character controller
     CharacterController controller;
     public Joystick joystick;
-    public Transform spawnTransform;
+    //public Transform spawnTransform;
  
 
     //Player Movement Speed
@@ -118,7 +118,7 @@ public class PlayerMovementController : MonoBehaviour
         isDead = false;
         controller = gameObject.GetComponent<CharacterController>();
         isGrounded = false;
-        transform.position = spawnTransform.position;
+        //transform.position = spawnTransform.position;
         currentWeapon = CurrentWeapon.Knife;
         
     }
@@ -288,7 +288,7 @@ public class PlayerMovementController : MonoBehaviour
 
     public void ResetPos() 
     {
-        transform.position = spawnTransform.position;
+        //transform.position = spawnTransform.position;
     }
 
     public void Stab()
