@@ -31,6 +31,7 @@ public class PlayerMovementController : MonoBehaviour
     public Transform groundCheck;
     public LayerMask groundLayer;
     bool isGrounded;
+    public float checkRadius = .1f;
 
 
     //animation
@@ -128,7 +129,7 @@ public class PlayerMovementController : MonoBehaviour
 
     void Update()
     {
-        isGrounded = Physics.CheckSphere(groundCheck.position, 5f, groundLayer);
+        isGrounded = Physics.CheckSphere(groundCheck.position, checkRadius, groundLayer);
         if (!isDead)
         {
             if (Mathf.Abs(joystick.Horizontal) > .2 || Mathf.Abs(joystick.Vertical) > .2)
