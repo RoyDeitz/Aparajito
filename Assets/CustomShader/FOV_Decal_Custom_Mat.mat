@@ -29,7 +29,7 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 3000
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
@@ -60,7 +60,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 0e1357349f003f04c9d1aaacca10a4f5, type: 3}
+        m_Texture: {fileID: 2800000, guid: d81fad80ff00c0147bae8804b19c2a4a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -98,11 +98,11 @@ Material:
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
-    - _Cull: 0
+    - _Cull: 1
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
-    - _DstBlend: 10
+    - _DstBlend: 7
     - _EnvironmentReflections: 1
     - _FracUVEnable: 0
     - _GlossMapScale: 0
@@ -113,13 +113,13 @@ Material:
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _ProjectionAngleDiscardEnable: 1
-    - _ProjectionAngleDiscardThreshold: -0.01
+    - _ProjectionAngleDiscardThreshold: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
-    - _SrcBlend: 5
+    - _SrcBlend: 3
     - _StencilComp: 0
     - _StencilRef: 0
     - _SupportOrthographicCamera: 0
@@ -129,9 +129,9 @@ Material:
     - _ZTest: 5
     - _ZWrite: 1
     m_Colors:
-    - _AlphaRemap: {r: 1, g: 0.2, b: 0, a: 0}
+    - _AlphaRemap: {r: 0.5, g: 0.1, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 0.24484088, g: 0.2735849, b: 0, a: 0}
+    - _Color: {r: 0.57985044, g: 1.0980393, b: 0, a: 0.6392157}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
   m_BuildTextureStacks: []

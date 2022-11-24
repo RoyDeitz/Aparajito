@@ -44,6 +44,7 @@ public class EnemyAI : MonoBehaviour
     Combat
     }
     public AlertLevel alertLevel;
+    public GameObject fovMesh;
 
     public enum EnemyType 
     {
@@ -103,7 +104,7 @@ public class EnemyAI : MonoBehaviour
     public int sniperDamage = 1000;
     public int smgDamage=15;
     public Transform weaponPoint;
-    public int bulletRadius;
+    public float bulletRadius;
     public int weaponDamage;
     public int weaponRange=1000;
     public LayerMask playerLayer;
@@ -163,8 +164,8 @@ public class EnemyAI : MonoBehaviour
             if (isObjFound)
             {
                 lr.positionCount = 2;
-                lr.startWidth = 2f;
-                lr.endWidth = 10;
+                lr.startWidth = .1f;
+                lr.endWidth = .1f;
                 lr.SetPosition(0, eyeTransform.position);
                 //lr.SetPosition(1,objPosition);
 
@@ -187,7 +188,7 @@ public class EnemyAI : MonoBehaviour
                             SniperScope.transform.rotation = mainCamera.rotation;
                             SniperScope.SetActive(true);
                         }
-                        lr.SetPosition(1, new Vector3(objPosition.x, objPosition.y + 35, objPosition.z));
+                        lr.SetPosition(1, objPosition);
                         Destroy(target);
 
                         //shoot;
@@ -292,6 +293,8 @@ public class EnemyAI : MonoBehaviour
         {// death condition
             if (enemyType == EnemyType.Soldier || enemyType == EnemyType.Officer) agent.speed = 0f;
             lr.positionCount = 0;
+            fovMesh.SetActive(false);
+            
         }
     }
 

@@ -94,7 +94,7 @@ public class PlayerMovementController : MonoBehaviour
     bool isFiring=false;
     bool isStabbing=false;
     bool isReloading=false;
-    public int bulletRadius;
+    public float bulletRadius;
 
     public float stabbingInterval;
     float timeTillNextAction;
@@ -449,62 +449,70 @@ public class PlayerMovementController : MonoBehaviour
         }
 
     }
-    public void SelectMachineGun() 
+    public void SelectMachineGun()
     {
-        if (currentWeapon != CurrentWeapon.SMG)
+        if (!isDead)
         {
-            isReloading = true; // only for creating a pause
-            timeTillNextAction = .8f;
-            currentWeapon = CurrentWeapon.SMG;
+            if (currentWeapon != CurrentWeapon.SMG)
+            {
+                isReloading = true; // only for creating a pause
+                timeTillNextAction = .8f;
+                currentWeapon = CurrentWeapon.SMG;
 
-            smgHolster.SetActive(false);
-            knife.SetActive(false);
-            rifle.SetActive(false);
-            anim.SetTrigger("DrawSMG");
-            smg.SetActive(true);
-            knifeHolster.SetActive(true);
-            rifleHolster.SetActive(true);
+                smgHolster.SetActive(false);
+                knife.SetActive(false);
+                rifle.SetActive(false);
+                anim.SetTrigger("DrawSMG");
+                smg.SetActive(true);
+                knifeHolster.SetActive(true);
+                rifleHolster.SetActive(true);
 
-            SMGDrawSound.Play();
+                SMGDrawSound.Play();
+            }
         }
     }
     public void SelectRifle() 
     {
-        if (currentWeapon != CurrentWeapon.Rifle)
+        if (!isDead)
         {
-            isReloading = true; // only for creating a pause
-            timeTillNextAction = .8f;
-            currentWeapon = CurrentWeapon.Rifle;
+            if (currentWeapon != CurrentWeapon.Rifle)
+            {
+                isReloading = true; // only for creating a pause
+                timeTillNextAction = .8f;
+                currentWeapon = CurrentWeapon.Rifle;
 
-            knifeHolster.SetActive(true);
-            smg.SetActive(false);
-            rifleHolster.SetActive(false);
-            anim.SetTrigger("DrawRifle");
-            rifle.SetActive(true);
-            knife.SetActive(false);
-            smgHolster.SetActive(true);
+                knifeHolster.SetActive(true);
+                smg.SetActive(false);
+                rifleHolster.SetActive(false);
+                anim.SetTrigger("DrawRifle");
+                rifle.SetActive(true);
+                knife.SetActive(false);
+                smgHolster.SetActive(true);
 
-            rifleDrawSound.Play();
+                rifleDrawSound.Play();
+            }
         }
-        
     }
     public void SelectKnife() 
     {
-        if (currentWeapon != CurrentWeapon.Knife)
+        if (!isDead)
         {
-            isReloading = true; // only for creating a pause
-            timeTillNextAction = .8f;
-            currentWeapon = CurrentWeapon.Knife;
+            if (currentWeapon != CurrentWeapon.Knife)
+            {
+                isReloading = true; // only for creating a pause
+                timeTillNextAction = .8f;
+                currentWeapon = CurrentWeapon.Knife;
 
-            knifeHolster.SetActive(false);
-            smg.SetActive(false);
-            rifle.SetActive(false);
-            anim.SetTrigger("DrawKnife");
-            knife.SetActive(true);
-            smgHolster.SetActive(true);
-            rifleHolster.SetActive(true);
+                knifeHolster.SetActive(false);
+                smg.SetActive(false);
+                rifle.SetActive(false);
+                anim.SetTrigger("DrawKnife");
+                knife.SetActive(true);
+                smgHolster.SetActive(true);
+                rifleHolster.SetActive(true);
 
-            drawKnifeSound.Play();
+                drawKnifeSound.Play();
+            }
         }
     }
     public void TakeDamageWithDeathType(int damage,int deathType) 
@@ -528,7 +536,42 @@ public class PlayerMovementController : MonoBehaviour
         }
     
     }
-   
 
-   
+    public void Shoot()
+    {
+        if (!isDead)
+        {
+            if (currentWeapon == CurrentWeapon.Rifle)
+            {
+                ShootRifle();
+            }
+            else if (currentWeapon == CurrentWeapon.SMG)
+            {
+                ShootSMG();
+            }
+            else if (currentWeapon == CurrentWeapon.Knife)
+            {
+                Stab();
+            }
+        }
+    }
+
+    public void Reload()
+    {
+        if (!isDead)
+        {
+            if (currentWeapon == CurrentWeapon.Rifle)
+            {
+                ReloadRifle();
+            }
+            else if (currentWeapon == CurrentWeapon.SMG)
+            {
+                ReloadSMG();
+            }
+        }
+
+    }
+
+
+
 }
